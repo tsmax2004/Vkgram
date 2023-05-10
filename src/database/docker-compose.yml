@@ -16,7 +16,17 @@ services:
       - "5432:5432"
     restart: always
 
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: "pgadmin"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    volumes:
+      - data_pgadmin:/var/lib/pgadmin
+    ports:
+      - "8080:80"
+
 volumes:
   postgres_data:
   data_pgadmin:
-

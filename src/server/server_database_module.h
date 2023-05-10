@@ -23,5 +23,5 @@ class ServerDatabaseModule {
 
  private:
   size_t num_connections_;
-  std::vector<pqxx::connection> connections_;
+  std::vector<pqxx::connection> connections_;   // one connection per every worker
 };

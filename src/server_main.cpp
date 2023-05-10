@@ -1,8 +1,5 @@
 #include <iostream>
 #include <signal.h>
-
-#include <pqxx/pqxx>
-
 #include <server/server.h>
 #include <server/config.h>
 
@@ -13,7 +10,7 @@ void sig_handler(int signal) {
 }
 
 int main() {
-//   Handle SIGINT
+//   Handle SIGINT for stooping server
   struct sigaction sigterm_action = {
       .sa_handler = sig_handler, .sa_flags = SA_RESTART};
   sigaction(SIGINT, &sigterm_action, NULL);

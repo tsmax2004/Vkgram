@@ -83,16 +83,20 @@ void Server::WaitingRequestsConnectionsLoop() {
       executors::Submit(workers_, [&, i] {
         int event_fd = events[i].ident;
         if (events[i].flags & EV_EOF) {
+          // client eds session
           CloseConnection(event_fd, kqueue_fd, &change_event);
         } else if (event_fd == server_socket_) {
+          // new client
           OpenConnection(event_fd, kqueue_fd, &change_event);
         } else if (events[i].filter & EVFILT_READ) {
+          // client sends request
           auto buffer = LoadData(event_fd);
           handler_.Handle(buffer);
         }
       });
     }
 
+    // wait until all clients are handled
     workers_.WaitIdle();
   }
 }

@@ -47,7 +47,7 @@ class Client {
 
   bool AuthenticationRequestImpl(RequestType type, const std::string& username, const std::string& password);
 
-  ThreadPool workers_;
+  ThreadPool workers_;  // for request handling and data sync
   fibers::Mutex connection_mutex_;
 
   ClientNetworkModule network_;   // guarded by mutex

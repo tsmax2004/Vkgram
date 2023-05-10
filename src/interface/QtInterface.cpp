@@ -97,7 +97,7 @@ void MainWindow::UpdateChat(const std::vector<Message>& messages) {
     gridLayoutMessages->addWidget(message_label.get());
 
     auto& sender =
-        host_.current_user_.id == message.sender_id ? host_.current_contact_.username : host_.current_user_.username;
+        host_.current_user_.id != message.sender_id ? host_.current_contact_.username : host_.current_user_.username;
     auto message_text =
         fmt::format("[{}] {}: {}", std::string(message.dt, sizeof(message.dt)), sender, message.text);
     message_label->setText(QString::fromUtf8(message_text));

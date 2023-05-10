@@ -58,11 +58,12 @@ bool Client::AuthenticationRequestImpl(RequestType type, const std::string& user
           return id;
         })
         | futures::AndThen([&](int id) {
+          // Successful
           current_user_ = {id, username};
           contacts_sync_.store(true);
           return result::Ok(true);
         })
-        | futures::OrElse([&](Error) { return result::Ok(false); })
+        | futures::OrElse([&](Error) { return result::Ok(false);  /* Unsuccessful */ })
         | futures::Await();
     std::move(p).SetValue(*result);
   });

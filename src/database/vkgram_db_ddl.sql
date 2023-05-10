@@ -1,3 +1,5 @@
+CREATE SCHEMA vkgram;
+
 CREATE TABLE vkgram.users (
     user_id     SERIAL PRIMARY KEY,
     username    TEXT,
